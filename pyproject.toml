@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphagenome-chembl-verifier"
+version = "0.1.0"
+description = "Deterministic cross-verification pipeline linking regulatory variant impact annotations to UniProt and ChEMBL chemogenomic targets."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Rishi", email = "rm1527158@gmail.com"}
+]
+keywords = ["bioinformatics", "genomics", "cheminformatics", "uniprot", "chembl"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.scripts]
+ag-verify = "ag_chembl_verifier.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
