@@ -1,6 +1,6 @@
 {
   "dataset": "regulatory-variant-chemogenomic-benchmark-v1",
-  "description": "Curated human loci pairing regulatory/functional variant evidence with druggable target verification gates.",
+  "description": "Curated 10-locus human benchmark pairing regulatory/functional variant evidence with Ensembl, UniProtKB, ChEMBL, and OpenTargets verification gates.",
   "loci": [
     {
       "variant_id": "chr7:140753336:A>T",
@@ -24,7 +24,7 @@
       "alphagenome_impact_score": 0.86,
       "gnomad_af": 0.0005,
       "expected_pass": true,
-      "notes": "PCSK9 lipid-lowering target"
+      "notes": "PCSK9 cardiometabolic lipid-lowering target"
     },
     {
       "variant_id": "chr18:63318364:C>T",
@@ -32,7 +32,7 @@
       "alphagenome_impact_score": 0.88,
       "gnomad_af": 0.0001,
       "expected_pass": true,
-      "notes": "BCL2 apoptosis regulator with BH3-mimetic inhibitors"
+      "notes": "BCL2 apoptosis regulator with BH3-mimetic clinical precedence"
     },
     {
       "variant_id": "chr5:1295113:G>A",
@@ -41,6 +41,30 @@
       "gnomad_af": 0.00005,
       "expected_pass": true,
       "notes": "TERT promoter regulatory hotspot"
+    },
+    {
+      "variant_id": "chr12:57751011:C>T",
+      "gene_symbol": "CDK4",
+      "alphagenome_impact_score": 0.84,
+      "gnomad_af": 0.0003,
+      "expected_pass": true,
+      "notes": "CDK4 cell-cycle kinase with approved small-molecule inhibitors"
+    },
+    {
+      "variant_id": "chr3:179234297:A>G",
+      "gene_symbol": "PIK3CA",
+      "alphagenome_impact_score": 0.93,
+      "gnomad_af": 0.0001,
+      "expected_pass": true,
+      "notes": "PIK3CA lipid kinase oncogenic target"
+    },
+    {
+      "variant_id": "chr9:5073770:G>T",
+      "gene_symbol": "JAK2",
+      "alphagenome_impact_score": 0.90,
+      "gnomad_af": 0.0004,
+      "expected_pass": true,
+      "notes": "JAK2 non-receptor tyrosine kinase target"
     },
     {
       "variant_id": "chr17:7674220:C>T",

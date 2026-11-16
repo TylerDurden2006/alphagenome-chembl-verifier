@@ -1,19 +1,21 @@
-"""Lightweight standard-library REST clients for UniProtKB and ChEMBL."""
+"""Lightweight standard-library REST/GraphQL clients for Ensembl, UniProtKB, ChEMBL, and OpenTargets."""
 
 from __future__ import annotations
 
 import json
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
 
 from .verifier import BioactivityRecord
 
-DEFAULT_TIMEOUT_SEC = 15
+DEFAULT_TIMEOUT_SEC = 30
 
 
-def _get_json(url: str, timeout: int = DEFAULT_TIMEOUT_SEC) -> dict[str, Any]:
-    """Fetch JSON from an HTTPS endpoint using Python's standard library."""
+def _get_json(url: str, timeout: int = DEFAULT_TIMEOUT_SEC, retries: int = 2) -> Any:
+    """Fetch JSON from an HTTPS GET endpoint with bounded retries."""
     req = urllib.request.Request(
         url,
         headers={
@@ -21,8 +23,77 @@ def _get_json(url: str, timeout: int = DEFAULT_TIMEOUT_SEC) -> dict[str, Any]:
             "User-Agent": "alphagenome-chembl-verifier/0.1.0",
         },
     )
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == retries:
+                return None
+            time.sleep(0.5 * (attempt + 1))
+    return None
+
+
+def _post_json(
+    url: str,
+    payload: dict[str, Any],
+    timeout: int = DEFAULT_TIMEOUT_SEC,
+    retries: int = 2,
+) -> Any:
+    """Send a JSON POST request with bounded retries."""
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "alphagenome-chembl-verifier/0.1.0",
+        },
+    )
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == retries:
+                return None
+            time.sleep(0.5 * (attempt + 1))
+    return None
+
+
+def fetch_ensembl_gene_id(gene_symbol: str, species: str = "homo_sapiens") -> str | None:
+    """Resolve an HGNC gene symbol to its primary Ensembl Gene ID (ENSG...)."""
+    url = (
+        f"https://rest.ensembl.org/xrefs/symbol/{urllib.parse.quote(species)}/"
+        f"{urllib.parse.quote(gene_symbol)}?content-type=application/json"
+    )
+    data = _get_json(url)
+    if not data:
+        return None
+    for item in data:
+        if item.get("type") == "gene" and str(item.get("id", "")).startswith("ENSG"):
+            return str(item["id"])
+    return None
+
+
+def fetch_opentargets_tractability(ensembl_gene_id: str) -> tuple[str, ...]:
+    """Fetch positive clinical/small-molecule tractability flags from OpenTargets GraphQL."""
+    query = {
+        "query": (
+            '{ target(ensemblId: "'
+            + ensembl_gene_id
+            + '") { tractability { label modality value } } }'
+        )
+    }
+    data = _post_json("https://api.platform.opentargets.org/api/v4/graphql", query)
+    if not data:
+        return ()
+    target = (data.get("data") or {}).get("target") or {}
+    labels: list[str] = []
+    for entry in target.get("tractability") or []:
+        if entry.get("value") is True:
+            labels.append(f"{entry.get('modality')}:{entry.get('label')}")
+    return tuple(labels[:5])
 
 
 def fetch_uniprot_accession(gene_symbol: str, organism_id: int = 9606) -> str | None:
@@ -35,6 +106,8 @@ def fetch_uniprot_accession(gene_symbol: str, organism_id: int = 9606) -> str | 
         f"?query={query}&fields=accession&format=json&size=1"
     )
     data = _get_json(url)
+    if not data:
+        return None
     results = data.get("results", [])
     if not results:
         return None
@@ -51,6 +124,8 @@ def fetch_chembl_target_activities(
         f"?target_components__accession={urllib.parse.quote(uniprot_accession)}&limit=1"
     )
     target_data = _get_json(target_url)
+    if not target_data:
+        return []
     targets = target_data.get("targets", [])
     if not targets:
         return []
@@ -62,6 +137,8 @@ def fetch_chembl_target_activities(
         f"&standard_units=nM&limit={int(limit)}"
     )
     act_data = _get_json(act_url)
+    if not act_data:
+        return []
     records: list[BioactivityRecord] = []
     for row in act_data.get("activities", []):
         raw_val = row.get("standard_value")

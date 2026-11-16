@@ -1,0 +1,180 @@
+﻿[
+  {
+    "variant_id": "chr7:140753336:A>T",
+    "gene_symbol": "BRAF",
+    "ensembl_gene_id": "ENSG00000157764",
+    "uniprot_accession": "P15056",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 23,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr7:55174772:G>A",
+    "gene_symbol": "EGFR",
+    "ensembl_gene_id": "ENSG00000146648",
+    "uniprot_accession": "P00533",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 6,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr1:55039974:G>T",
+    "gene_symbol": "PCSK9",
+    "ensembl_gene_id": "ENSG00000169174",
+    "uniprot_accession": "Q8NBP7",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 3,
+    "tractability_labels": [
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "AB:Approved Drug",
+      "AB:GO CC high conf"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr18:63318364:C>T",
+    "gene_symbol": "BCL2",
+    "ensembl_gene_id": "ENSG00000171791",
+    "uniprot_accession": "P10415",
+    "passed": false,
+    "tier": "UNVERIFIED",
+    "potent_ligands": 0,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:Druggable Family",
+      "AB:UniProt SigP or TMHMM"
+    ],
+    "reasons": [
+      "No ChEMBL bioactivity <= 1000.0 nM observed"
+    ]
+  },
+  {
+    "variant_id": "chr5:1295113:G>A",
+    "gene_symbol": "TERT",
+    "ensembl_gene_id": "ENSG00000164362",
+    "uniprot_accession": "O14746",
+    "passed": true,
+    "tier": "TIER_2_VALIDATED",
+    "potent_ligands": 1,
+    "tractability_labels": [
+      "SM:High-Quality Ligand",
+      "SM:Druggable Family",
+      "AB:GO CC med conf",
+      "PR:UniProt Ubiquitination",
+      "PR:Small Molecule Binder"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr12:57751011:C>T",
+    "gene_symbol": "CDK4",
+    "ensembl_gene_id": "ENSG00000135446",
+    "uniprot_accession": "P11802",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 13,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr3:179234297:A>G",
+    "gene_symbol": "PIK3CA",
+    "ensembl_gene_id": "ENSG00000121879",
+    "uniprot_accession": "P42336",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 12,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr9:5073770:G>T",
+    "gene_symbol": "JAK2",
+    "ensembl_gene_id": "ENSG00000096968",
+    "uniprot_accession": "O60674",
+    "passed": true,
+    "tier": "TIER_1_HIGH_CONFIDENCE",
+    "potent_ligands": 15,
+    "tractability_labels": [
+      "SM:Approved Drug",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:High-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": []
+  },
+  {
+    "variant_id": "chr17:7674220:C>T",
+    "gene_symbol": "TP53",
+    "ensembl_gene_id": "ENSG00000141510",
+    "uniprot_accession": "P04637",
+    "passed": false,
+    "tier": "UNVERIFIED",
+    "potent_ligands": 7,
+    "tractability_labels": [
+      "SM:Advanced Clinical",
+      "SM:Structure with Ligand",
+      "SM:High-Quality Ligand",
+      "SM:Med-Quality Pocket",
+      "SM:Druggable Family"
+    ],
+    "reasons": [
+      "gnomAD AF 0.1200 > 0.0100 rarity cutoff"
+    ]
+  },
+  {
+    "variant_id": "chr19:44908684:T>C",
+    "gene_symbol": "APOE",
+    "ensembl_gene_id": "ENSG00000130203",
+    "uniprot_accession": "P02649",
+    "passed": false,
+    "tier": "UNVERIFIED",
+    "potent_ligands": 0,
+    "tractability_labels": [
+      "SM:Structure with Ligand",
+      "AB:UniProt loc high conf",
+      "AB:GO CC high conf",
+      "AB:UniProt SigP or TMHMM",
+      "PR:Database Ubiquitination"
+    ],
+    "reasons": [
+      "Impact score 0.420 < 0.70",
+      "gnomAD AF 0.1500 > 0.0100 rarity cutoff",
+      "No ChEMBL bioactivity <= 1000.0 nM observed"
+    ]
+  }
+]

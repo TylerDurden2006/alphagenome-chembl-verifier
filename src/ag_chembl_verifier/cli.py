@@ -12,7 +12,12 @@ from .batch import (
     reports_to_json,
     run_batch_verification,
 )
-from .clients import fetch_chembl_target_activities, fetch_uniprot_accession
+from .clients import (
+    fetch_chembl_target_activities,
+    fetch_ensembl_gene_id,
+    fetch_opentargets_tractability,
+    fetch_uniprot_accession,
+)
 from .verifier import VariantEvidence, verify_target_evidence
 
 
@@ -20,7 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
     """Create the CLI argument parser."""
     parser = argparse.ArgumentParser(
         prog="ag-verify",
-        description="Cross-verify regulatory variants against UniProt and ChEMBL.",
+        description="Cross-verify regulatory variants against Ensembl, UniProt, ChEMBL, and OpenTargets.",
     )
     parser.add_argument("--batch", help="Path to benchmark JSON file for batch verification")
     parser.add_argument(
@@ -45,7 +50,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--offline",
         action="store_true",
-        help="Skip live UniProt/ChEMBL HTTPS calls",
+        help="Skip live HTTPS calls",
     )
     return parser
 
@@ -64,6 +69,10 @@ def main(argv: list[str] | None = None) -> int:
     if not (args.variant and args.gene and args.impact is not None):
         parser.error("Either --batch or (--variant, --gene, --impact) must be provided.")
 
+    ensembl_id = None if args.offline else fetch_ensembl_gene_id(args.gene)
+    tractability = (
+        () if (args.offline or not ensembl_id) else fetch_opentargets_tractability(ensembl_id)
+    )
     uniprot_acc = None if args.offline else fetch_uniprot_accession(args.gene)
     activities = (
         []
@@ -76,6 +85,8 @@ def main(argv: list[str] | None = None) -> int:
         alphagenome_impact_score=args.impact,
         gnomad_af=args.gnomad_af,
         uniprot_accession=uniprot_acc,
+        ensembl_gene_id=ensembl_id,
+        tractability_labels=tractability,
     )
     report = verify_target_evidence(evidence, activities)
     print(json.dumps(asdict(report), indent=2))

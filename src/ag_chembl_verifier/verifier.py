@@ -14,6 +14,8 @@ class VariantEvidence:
     alphagenome_impact_score: float
     gnomad_af: float | None = None
     uniprot_accession: str | None = None
+    ensembl_gene_id: str | None = None
+    tractability_labels: tuple[str, ...] = field(default_factory=tuple)
 
     def validate(self) -> list[str]:
         """Return validation errors for malformed input fields."""
@@ -46,10 +48,12 @@ class VerificationReport:
 
     variant_id: str
     gene_symbol: str
+    ensembl_gene_id: str | None
     uniprot_accession: str | None
     passed: bool
     tier: str
     potent_ligands: int
+    tractability_labels: tuple[str, ...] = field(default_factory=tuple)
     reasons: tuple[str, ...] = field(default_factory=tuple)
 
 
@@ -71,10 +75,12 @@ def verify_target_evidence(
         return VerificationReport(
             variant_id=variant.variant_id,
             gene_symbol=variant.gene_symbol,
+            ensembl_gene_id=variant.ensembl_gene_id,
             uniprot_accession=variant.uniprot_accession,
             passed=False,
             tier="INVALID_INPUT",
             potent_ligands=0,
+            tractability_labels=variant.tractability_labels,
             reasons=tuple(errors),
         )
 
@@ -114,9 +120,11 @@ def verify_target_evidence(
     return VerificationReport(
         variant_id=variant.variant_id,
         gene_symbol=variant.gene_symbol,
+        ensembl_gene_id=variant.ensembl_gene_id,
         uniprot_accession=variant.uniprot_accession,
         passed=passed,
         tier=tier,
         potent_ligands=len(potent),
+        tractability_labels=variant.tractability_labels,
         reasons=tuple(reasons),
     )
