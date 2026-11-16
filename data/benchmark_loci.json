@@ -1,0 +1,62 @@
+{
+  "dataset": "regulatory-variant-chemogenomic-benchmark-v1",
+  "description": "Curated human loci pairing regulatory/functional variant evidence with druggable target verification gates.",
+  "loci": [
+    {
+      "variant_id": "chr7:140753336:A>T",
+      "gene_symbol": "BRAF",
+      "alphagenome_impact_score": 0.94,
+      "gnomad_af": 0.0001,
+      "expected_pass": true,
+      "notes": "BRAF canonical kinase target with extensive sub-micromolar ChEMBL inhibitors"
+    },
+    {
+      "variant_id": "chr7:55174772:G>A",
+      "gene_symbol": "EGFR",
+      "alphagenome_impact_score": 0.91,
+      "gnomad_af": 0.0002,
+      "expected_pass": true,
+      "notes": "EGFR receptor tyrosine kinase with potent clinical inhibitors"
+    },
+    {
+      "variant_id": "chr1:55039974:G>T",
+      "gene_symbol": "PCSK9",
+      "alphagenome_impact_score": 0.86,
+      "gnomad_af": 0.0005,
+      "expected_pass": true,
+      "notes": "PCSK9 lipid-lowering target"
+    },
+    {
+      "variant_id": "chr18:63318364:C>T",
+      "gene_symbol": "BCL2",
+      "alphagenome_impact_score": 0.88,
+      "gnomad_af": 0.0001,
+      "expected_pass": true,
+      "notes": "BCL2 apoptosis regulator with BH3-mimetic inhibitors"
+    },
+    {
+      "variant_id": "chr5:1295113:G>A",
+      "gene_symbol": "TERT",
+      "alphagenome_impact_score": 0.89,
+      "gnomad_af": 0.00005,
+      "expected_pass": true,
+      "notes": "TERT promoter regulatory hotspot"
+    },
+    {
+      "variant_id": "chr17:7674220:C>T",
+      "gene_symbol": "TP53",
+      "alphagenome_impact_score": 0.85,
+      "gnomad_af": 0.12,
+      "expected_pass": false,
+      "notes": "Negative control: fails gnomAD rarity gate (AF 0.12 > 0.01)"
+    },
+    {
+      "variant_id": "chr19:44908684:T>C",
+      "gene_symbol": "APOE",
+      "alphagenome_impact_score": 0.42,
+      "gnomad_af": 0.15,
+      "expected_pass": false,
+      "notes": "Negative control: fails both regulatory impact and gnomAD rarity gates"
+    }
+  ]
+}
