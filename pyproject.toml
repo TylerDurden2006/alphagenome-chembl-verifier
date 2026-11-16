@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-  {name = "Rishi", email = "rm1527158@gmail.com"}
+  {name = "Rishi Mehra", email = "rm1527158@gmail.com"}
 ]
 keywords = ["bioinformatics", "genomics", "cheminformatics", "uniprot", "chembl"]
 classifiers = [

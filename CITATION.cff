@@ -3,9 +3,10 @@ title: "alphagenome-chembl-verifier: Deterministic Cross-Verification for Regula
 message: "If you use this software in your research, please cite it using the metadata below."
 type: software
 authors:
-  - family-names: "Rishi"
+  - family-names: "Mehra"
+    given-names: "Rishi"
     affiliation: "I.K. Gujral Punjab Technical University, Kapurthala"
-repository-code: "https://github.com/rm1527158-collab/alphagenome-chembl-verifier"
+repository-code: "https://github.com/TylerDurden2006/alphagenome-chembl-verifier"
 license: MIT
 version: 0.1.0
 date-released: 2026-11-16

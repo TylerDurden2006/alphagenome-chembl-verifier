@@ -1,8 +1,8 @@
 # Deterministic Cross-Verification of Non-Coding Regulatory Variants and Chemogenomic Target Tractability
 
-**Author:** Rishi  
+**Author:** Rishi Mehra  
 **Affiliation:** Department of Computer Science and Engineering, I.K. Gujral Punjab Technical University, Kapurthala, Punjab, India  
-**Repository:** https://github.com/rm1527158-collab/alphagenome-chembl-verifier  
+**Repository:** https://github.com/TylerDurden2006/alphagenome-chembl-verifier  
 **Date:** November 16, 2026  
 
 ---
@@ -29,4 +29,4 @@ The package is implemented in pure Python 3.10+ using the standard library (`url
 
 ## 4. Availability
 
-Source code, automated tests, and `CITATION.cff` metadata are openly available under the MIT License at `https://github.com/rm1527158-collab/alphagenome-chembl-verifier`.
+Source code, automated tests, and `CITATION.cff` metadata are openly available under the MIT License at `https://github.com/TylerDurden2006/alphagenome-chembl-verifier`.
